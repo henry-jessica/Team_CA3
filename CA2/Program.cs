@@ -224,7 +224,7 @@ namespace CA2
                     int numFields = 0;
                     int playerGoalsInt = 0; //when I am using ref i cant convert in line so for this reason I made this integer
                     int playerMachesInt = 0;
-
+                    int ageJunior = 0;
                     while ((lineIn = sr.ReadLine()) != null)
                     {
                         string[] playersInfo = lineIn.Split(',');
@@ -234,6 +234,11 @@ namespace CA2
                                  IsPresent(playersInfo[1], "Goals Scored") && IsInteger(playersInfo[1], "Goals Scored", ref playerGoalsInt) &&
                                  IsPresent(playersInfo[2], "Maches Played") && IsInteger(playersInfo[2], "Maches Played", ref playerMachesInt);
 
+
+                        //if numFiels is equal to 4, check if the age is valid. otherwise it returns false to nowhere using '_'.
+                        _ = numFields==4?result = IsInteger(playersInfo[3], "Junior Player Age", ref ageJunior) && CheckPositive(ageJunior, "Age"):false;
+
+
                         if (!result)
                             Console.WriteLine("Error data format {0} object not created", lineIn);
                         else
@@ -242,7 +247,6 @@ namespace CA2
                                 players[count] = new JuniorPlayer(playersInfo[0], playerGoalsInt, playerMachesInt, int.Parse(playersInfo[3]));
                             else
                                 players[count] = new Player(playersInfo[0], playerGoalsInt, playerMachesInt);
-
                             count++;
                             countPlayersAdd++;
                         }
