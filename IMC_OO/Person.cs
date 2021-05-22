@@ -86,7 +86,6 @@ namespace IMC_OO
             {
                 range = "Obese";
             }
-
             return range;
         }
     }
